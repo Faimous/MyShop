@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MyShop.Models;
+using static MyShop.ApplicationUserManager;
 
 namespace MyShop
 {
