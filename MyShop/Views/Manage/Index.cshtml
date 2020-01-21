@@ -85,3 +85,23 @@
         </dd>
     </dl>
 </div>
+
+
+
+<div class="text-center">
+    <h2>Kendo UI Grid</h2>
+    @(Html.Kendo().Grid<GridInTabStrip.Models.Product>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.ProductID).Width(100);
+                columns.Bound(c => c.ProductName).Width(300);
+                columns.Bound(c => c.UnitPrice).Width(100);
+                columns.Bound(c => c.Discontinued).Width(200);
+            })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("Select", "Home"))
+            )
+    )
+</div>

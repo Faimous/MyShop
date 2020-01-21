@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using MyShop.Models.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -91,6 +94,24 @@ namespace MyShop.Controllers
         {
             //var model = xxx
             return View();
+        }
+
+        public ActionResult ProductList([DataSourceRequest]DataSourceRequest request)
+        {
+            try
+            {
+                List<Product> _emp = new List<Product>();
+                _emp.Add(new Product(1, "Bobb", "Ross"));
+                _emp.Add(new Product(2, "Pradeep", "Raj"));
+                _emp.Add(new Product(3, "Arun", "Kumar"));
+                DataSourceResult result = _emp.ToDataSourceResult(request);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
 }

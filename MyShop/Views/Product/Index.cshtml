@@ -1,0 +1,15 @@
+﻿@model MyShop.Models.Products.Product
+
+<div class="container">
+    <div class="row">
+
+        @(Html.Kendo().Grid<MyShop.Models.Products.Product>()
+    .Name("EmpGrid")
+    .DataSource(dataSource => dataSource
+        .Ajax()
+
+        .Read(read => read.Action("ProductList", "Product"))
+        )
+        )
+    </div>
+</div>  
