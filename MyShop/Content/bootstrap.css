@@ -4344,7 +4344,7 @@ input[type="button"].btn-block {
   justify-content: space-between;
 }
 
-.navbar-brand {
+/*.navbar-brand {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
@@ -4352,7 +4352,14 @@ input[type="button"].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
-}
+}*/
+.navbar-brand {  
+  float: left;  
+  padding: 15px 15px;  
+  font-size: 40px;  
+  line-height: 20px;  
+  font-family:'Facebook Letter Faces'  
+} 
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
