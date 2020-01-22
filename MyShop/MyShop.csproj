@@ -185,12 +185,20 @@
     <Compile Include="Migrations\202001202220296_init.Designer.cs">
       <DependentUpon>202001202220296_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220908024_orderStatus.cs" />
+    <Compile Include="Migrations\202001220908024_orderStatus.Designer.cs">
+      <DependentUpon>202001220908024_orderStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderData.cs" />
+    <Compile Include="Models\Orders\OrderStatus.cs" />
     <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Products\ProductData.cs" />
+    <Compile Include="Models\_Databse\OrderStatusTable.cs" />
     <Compile Include="Models\_Databse\_DatabseContextShop.cs" />
     <Compile Include="Models\_Databse\OrderTable.cs" />
     <Compile Include="Models\_Databse\ProductTable.cs" />
@@ -370,6 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -378,6 +387,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001202220296_init.resx">
       <DependentUpon>202001202220296_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220908024_orderStatus.resx">
+      <DependentUpon>202001220908024_orderStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
