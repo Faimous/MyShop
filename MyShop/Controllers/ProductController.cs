@@ -24,14 +24,14 @@ namespace MyShop.Controllers
         }
 
         // GET: Product/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Add(ProductData model)
         {
             try
             {

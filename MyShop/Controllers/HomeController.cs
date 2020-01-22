@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 namespace MyShop.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            ViewBag.isAuthenticated = User.Identity.IsAuthenticated;
             return View();
         }
 
