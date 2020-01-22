@@ -15,6 +15,6 @@ namespace MyShop.Models._Databse
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public OrderStatus Id { get; set; }
 
-        public string Name { get; set; }
+        public string OrderName { get; set; }
     }
 }

@@ -96,22 +96,22 @@ namespace MyShop.Controllers
             return View();
         }
 
-        public ActionResult ProductList([DataSourceRequest]DataSourceRequest request)
-        {
-            try
-            {
-                List<Product> _emp = new List<Product>();
-                _emp.Add(new Product(1, "Bobb", "Ross"));
-                _emp.Add(new Product(2, "Pradeep", "Raj"));
-                _emp.Add(new Product(3, "Arun", "Kumar"));
-                DataSourceResult result = _emp.ToDataSourceResult(request);
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+        //public ActionResult ProductList([DataSourceRequest]DataSourceRequest request)
+        //{
+        //    try
+        //    {
+        //        list<product> _emp = new list<product>();
+        //        _emp.add(new product(1, "bobb", "ross"));
+        //        _emp.add(new product(2, "pradeep", "raj"));
+        //        _emp.add(new product(3, "arun", "kumar"));
+        //        datasourceresult result = _emp.todatasourceresult(request);
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(ex.Message, JsonRequestBehavior.AllowGet);
 
-            }
-        }
+        //    }
+        //}
     }
 }
