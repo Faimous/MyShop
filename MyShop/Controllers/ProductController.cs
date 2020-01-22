@@ -1,5 +1,6 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using MyShop.Models.Orders;
 using MyShop.Models.Products;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,7 @@ namespace MyShop.Controllers
 {
     public class ProductController : DefaultController
     {
-        private Product productService;
-
-        //public ListViewController()
-        //{
-        //    productService = new ProductService(new SampleEntities());
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    productService.Dispose();
-
-        //    base.Dispose(disposing);
-        //}
+      
         [HttpGet]
         public ActionResult Index()
         {
@@ -39,28 +28,48 @@ namespace MyShop.Controllers
         {
             List<ProductData> result;
             {
-            using (var db = new Models._Databse._DatabseContextShop())
-            {
-                result = db.Products.Select(product => new ProductData
+                using (var db = new Models._Databse._DatabseContextShop())
                 {
-                    ProductID = product.Id,
-                    ProductName = product.ProductName,
-                    UnitPrice = product.UnitPrice ?? 0,
-                    UnitsInStock = product.UnitsInStock ?? 0,
-                    UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                    Discontinued = product.Discontinued,
-                    LastSupply = product.LastSupply
-                }).ToList();
-                return result;
-            }
+                    result = db.Products
+                        .Where(product => product.Discontinued != true
+                        && product.UnitsInStock > 0
+                        )
+                        .Select(product => new ProductData
+                    {
+                        ProductID = product.Id,
+                        ProductName = product.ProductName,
+                        UnitPrice = product.UnitPrice ?? 0,
+                        UnitsInStock = product.UnitsInStock ?? 0,
+                        UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                        Discontinued = product.Discontinued,
+                        LastSupply = product.LastSupply
+                    }).ToList();
+                    return result;
+                }
             }
         }
 
         [HttpGet]
         public ActionResult List()
-        {
+        {            
             List<ProductData> model = GetProducts();
             return View(model);
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddProduct(OrderData model)
+        {
+
+
+            return View(model);
+        }
+
     }
 }
