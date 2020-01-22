@@ -15,7 +15,7 @@ namespace MyShop.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Details about this app";
 
             return View();
         }
