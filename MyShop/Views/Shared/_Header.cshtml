@@ -14,7 +14,7 @@
           .Name("Menu")
           .Items(items =>
           {
-              items.Add().Text("Product List").Action("Index", "Product");
+              items.Add().Text("Product List").Action("List", "Product");
               items.Add().Text("Contact").Action("Contact", "Home");
               items.Add().Text("About").Action("About", "Home");
               items.Add().Text("Add Product").Action("AddPruduct", "Product");
@@ -36,7 +36,7 @@ else
       .Name("Menu")
       .Items(items =>
       {
-          items.Add().Text("Product List").Action("Index", "Product");
+          items.Add().Text("Product List").Action("List", "Product");
           items.Add().Text("Contact").Action("Contact", "Home");
           items.Add().Text("About").Action("About", "Home");
           items.Add().Text("Log in").Action("Login", "Account");

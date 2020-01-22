@@ -27,8 +27,7 @@ namespace MyShop.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<ProductData> model = GetProducts();
-            return View(model);
+            return RedirectToAction("List", "Product");
         }
 
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
@@ -54,35 +53,14 @@ namespace MyShop.Controllers
                 }).ToList();
                 return result;
             }
-               
-
-
-
             }
         }
 
         [HttpGet]
         public ActionResult List()
         {
-            return RedirectToAction("Index", "Home");
+            List<ProductData> model = GetProducts();
+            return View(model);
         }
-
-        //public ActionResult ProductList([DataSourceRequest]DataSourceRequest request)
-        //{
-        //    try
-        //    {
-        //        list<product> _emp = new list<product>();
-        //        _emp.add(new product(1, "bobb", "ross"));
-        //        _emp.add(new product(2, "pradeep", "raj"));
-        //        _emp.add(new product(3, "arun", "kumar"));
-        //        datasourceresult result = _emp.todatasourceresult(request);
-        //        return Json(result, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(ex.Message, JsonRequestBehavior.AllowGet);
-
-        //    }
-        //}
     }
 }
