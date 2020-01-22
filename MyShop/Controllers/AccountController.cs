@@ -14,7 +14,7 @@ using static MyShop.ApplicationUserManager;
 namespace MyShop.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DefaultController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -388,11 +388,19 @@ namespace MyShop.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LogOff()
+        //{
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        //    return RedirectToAction("Index", "Home");
+        //}
+
+        [HttpGet]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             return RedirectToAction("Index", "Home");
         }
 

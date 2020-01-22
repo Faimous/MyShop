@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -16,12 +17,14 @@ namespace MyShop.Models._Databse
 
         public string ProductName { get; set; }
 
-        public string ProductDescription { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        public string ImageLink { get; set; }
+        public decimal? UnitsInStock { get; set; }
 
-        public double Price { get; set; }
+        public decimal? UnitsOnOrder { get; set; }
 
+        public bool Discontinued { get; set; }
 
+        public DateTime LastSupply { get; set; }
     }
 }

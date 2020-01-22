@@ -187,6 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -205,6 +206,10 @@
     <Compile Include="Migrations\202001220916027_ProductCategory.Designer.cs">
       <DependentUpon>202001220916027_ProductCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001221223590_products.cs" />
+    <Compile Include="Migrations\202001221223590_products.Designer.cs">
+      <DependentUpon>202001221223590_products.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -213,7 +218,6 @@
     <Compile Include="Models\Orders\OrderData.cs" />
     <Compile Include="Models\Orders\OrderStatus.cs" />
     <Compile Include="Models\Products\Product.cs" />
-    <Compile Include="Models\Products\ProductCategory.cs" />
     <Compile Include="Models\Products\ProductData.cs" />
     <Compile Include="Models\_Databse\OrderStatusTable.cs" />
     <Compile Include="Models\_Databse\ProductCategoryTable.cs" />
@@ -243,6 +247,13 @@
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\background2.jpg" />
     <Content Include="Content\web\menu\shoplogo2.png" />
+    <Content Include="Content\web\products\1.jpg" />
+    <Content Include="Content\web\products\2.jpg" />
+    <Content Include="Content\web\products\3.jpg" />
+    <Content Include="Content\web\products\4.jpg" />
+    <Content Include="Content\web\products\5.jpg" />
+    <Content Include="Content\web\products\6.jpg" />
+    <Content Include="Content\web\products\7.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -411,6 +422,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001220916027_ProductCategory.resx">
       <DependentUpon>202001220916027_ProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221223590_products.resx">
+      <DependentUpon>202001221223590_products.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -9,91 +9,62 @@ using System.Web.Mvc;
 
 namespace MyShop.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : DefaultController
     {
-        // GET: Product
+        private Product productService;
+
+        //public ListViewController()
+        //{
+        //    productService = new ProductService(new SampleEntities());
+        //}
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    productService.Dispose();
+
+        //    base.Dispose(disposing);
+        //}
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            List<ProductData> model = GetProducts();
+            return View(model);
         }
 
-        // GET: Product/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return View();
+            return Json(GetProducts().ToDataSourceResult(request));
         }
 
-        // GET: Product/Create
-        public ActionResult Add()
+        public static List<ProductData> GetProducts()
         {
-            return View();
-        }
-
-        // POST: Product/Create
-        [HttpPost]
-        public ActionResult Add(ProductData model)
-        {
-            try
+            List<ProductData> result;
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+            using (var db = new Models._Databse._DatabseContextShop())
+            {
+                result = db.Products.Select(product => new ProductData
+                {
+                    ProductID = product.Id,
+                    ProductName = product.ProductName,
+                    UnitPrice = product.UnitPrice ?? 0,
+                    UnitsInStock = product.UnitsInStock ?? 0,
+                    UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                    Discontinued = product.Discontinued,
+                    LastSupply = product.LastSupply
+                }).ToList();
+                return result;
             }
-            catch
-            {
-                return View();
-            }
-        }
+               
 
-        // GET: Product/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Product/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Product/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
 
         [HttpGet]
         public ActionResult List()
         {
-            //var model = xxx
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         //public ActionResult ProductList([DataSourceRequest]DataSourceRequest request)
