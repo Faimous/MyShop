@@ -11,27 +11,16 @@ namespace MyShop.Controllers
     {
         public ActionResult Index()
         {
-
-
-            ViewBag.isAuthenticated = User.Identity.IsAuthenticated;
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.isAuthenticated = User.Identity.IsAuthenticated;
-
-            ViewBag.Message = "Details about this app";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.isAuthenticated = User.Identity.IsAuthenticated;
-
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

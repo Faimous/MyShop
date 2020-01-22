@@ -71,5 +71,12 @@ namespace MyShop.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public JsonResult ShowProduct(int id)
+        {
+            return Json(id);
+        }
+
     }
 }

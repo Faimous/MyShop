@@ -1,13 +1,4 @@
-﻿@{ 
-    bool isAuthenticated = false;
-    if(ViewBag.isAuthenticated != null)
-    {
-        isAuthenticated = ViewBag.isAuthenticated;
-    }
-
-}
-
-@if (isAuthenticated)
+﻿@if (User.Identity.IsAuthenticated)
 {
     <div id="MyShopAuthorized">
         @(Html.Kendo().Menu()
