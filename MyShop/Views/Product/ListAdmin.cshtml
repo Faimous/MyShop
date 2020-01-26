@@ -18,7 +18,7 @@
           //toolbar.Pdf();
           toolbar.Template("<a class='k-button k-button-icontext' href='AddProduct'></span>Add new product</a>");
       })
-      .ColumnMenu()
+     // .ColumnMenu()
       .Editable(editable => editable.Mode(GridEditMode.InCell))
       .Pageable()
       .Navigatable()
@@ -49,3 +49,11 @@ k-grid-content k-auto-scrollable{
     border-bottom-width:10px;
 }
 </style>
+
+<script>
+    function notEditable()
+    {
+        return false;
+    }
+
+</script>
