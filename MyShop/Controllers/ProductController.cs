@@ -22,39 +22,21 @@ namespace MyShop.Controllers
 
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetProducts().ToDataSourceResult(request));
-        }
-
-        public static List<ProductData> GetProducts()
-        {
-            List<ProductData> result;
+            using (var db = new _DatabseContextShop())
             {
-                using (var db = new Models._Databse._DatabseContextShop())
-                {
-                    result = db.Products
-                        .Where(product => product.Discontinued != true
-                        && product.UnitsInStock > 0
-                        )
-                        .Select(product => new ProductData
-                    {
-                        ProductID = product.Id,
-                        ProductName = product.ProductName,
-                        UnitPrice = product.UnitPrice ?? 0,
-                        UnitsInStock = product.UnitsInStock ?? 0,
-                        UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                        Discontinued = product.Discontinued,
-                        LastSupply = product.LastSupply
-                    }).ToList();
-                    return result;
-                }
-            }
+                return Json(Product.GetProducts(db).ToDataSourceResult(request));
+            }              
         }
+      
 
         [HttpGet]
         public ActionResult List()
-        {            
-            List<ProductData> model = GetProducts();
-            return View(model);
+        {
+            using (var db = new _DatabseContextShop())
+            {
+                 List<ProductData> model = Product.GetProducts(db);
+                 return View(model);
+            }              
         }
 
         [HttpGet]
@@ -78,21 +60,9 @@ namespace MyShop.Controllers
         {
             using (var db = new _DatabseContextShop())
             {
-                var model = Product.GetOneProductModel(id, db);
+               var model = Product.GetOneProductModel(id, db);
                return View(model);
             }
         }
-
-        //[HttpGet]
-        //public ActionResult ShowProduct()
-        //{
-        //    using (var db = new _DatabseContextShop())
-        //    {
-        //       // var model = Product.GetOneProductModel(id, db);
-        //        return View();
-        //    }
-
-        //}
-
     }
 }

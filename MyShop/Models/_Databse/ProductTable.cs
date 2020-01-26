@@ -17,6 +17,8 @@ namespace MyShop.Models._Databse
 
         public string ProductName { get; set; }
 
+        public string Description { get; set; }
+
         public decimal? UnitPrice { get; set; }
 
         public decimal? UnitsInStock { get; set; }

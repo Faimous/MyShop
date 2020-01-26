@@ -211,6 +211,10 @@
     <Compile Include="Migrations\202001221223590_products.Designer.cs">
       <DependentUpon>202001221223590_products.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001261653251_description.cs" />
+    <Compile Include="Migrations\202001261653251_description.Designer.cs">
+      <DependentUpon>202001261653251_description.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart\Item.cs" />
@@ -446,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001221223590_products.resx">
       <DependentUpon>202001221223590_products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001261653251_description.resx">
+      <DependentUpon>202001261653251_description.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

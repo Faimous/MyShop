@@ -1,8 +1,5 @@
 ﻿@model List<MyShop.Models.Products.ProductData>   
-@{int i = 1;}
 
- @*onclick="showProduct('#:ProductID#')"*@
- @*onclick="location.href='@Url.Action("ShowProduct", "Product", new { id = ++i })'"*@
 <div id="body">
 </div>
             
@@ -19,8 +16,7 @@
 
 
 
-<hr />
-
+<br />
 <div class="demo-section k-content wide">
     @(Html.Kendo().ListView(Model)
     .Name("listView")
