@@ -5,6 +5,7 @@ using MyShop.Models.Orders;
 using MyShop.Models.Products;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,6 +29,28 @@ namespace MyShop.Controllers
             }
         }
 
+        public ActionResult Products_ReadAdmin([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var db = new _DatabseContextShop())
+            {
+                IQueryable<ProductTable> products = db.Products;
+                DataSourceResult result = products.ToDataSourceResult(request, productTable => new
+                {
+                    Id = productTable.Id,
+                    ProductName = productTable.ProductName,
+                    Description = productTable.Description,
+                    UnitPrice = productTable.UnitPrice,
+                    UnitsInStock = productTable.UnitsInStock,
+                    UnitsOnOrder = productTable.UnitsOnOrder,
+                    Discontinued = productTable.Discontinued,
+                    LastSupply = productTable.LastSupply
+                });
+
+                return Json(result);
+            }
+        }
+
+
 
         [HttpGet]
         public ActionResult List()
@@ -37,6 +60,12 @@ namespace MyShop.Controllers
                 List<ProductData> model = Product.GetProducts(db);
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public ActionResult UploadView()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -67,7 +96,7 @@ namespace MyShop.Controllers
                 {
                     Product.Add(model, db);
                 }
-               // return View();
+                // return View();
 
             }
             return View(model);
@@ -83,5 +112,98 @@ namespace MyShop.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ListAdmin()
+        {
+            return View();
+        }
+
+        // private _DatabseContextShop db = new _DatabseContextShop();
+
+
+
+      
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductTable productTable)
+        {
+
+            if (ModelState.IsValid)
+            {
+                using (var db = new _DatabseContextShop())
+                {
+                    var entity = new ProductTable
+                    {
+                        Id = productTable.Id,
+                        ProductName = productTable.ProductName,
+                        Description = productTable.Description,
+                        UnitPrice = productTable.UnitPrice,
+                        UnitsInStock = productTable.UnitsInStock,
+                        UnitsOnOrder = productTable.UnitsOnOrder,
+                        Discontinued = productTable.Discontinued,
+                        LastSupply = productTable.LastSupply
+                    };
+
+                    db.Products.Attach(entity);
+                    db.Entry(entity).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+
+            return Json(new[] { productTable }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, ProductTable productTable)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new _DatabseContextShop())
+                {
+                    var entity = new ProductTable
+                    {
+                        Id = productTable.Id,
+                        ProductName = productTable.ProductName,
+                        Description = productTable.Description,
+                        UnitPrice = productTable.UnitPrice,
+                        UnitsInStock = productTable.UnitsInStock,
+                        UnitsOnOrder = productTable.UnitsOnOrder,
+                        Discontinued = productTable.Discontinued,
+                        LastSupply = productTable.LastSupply
+                    };
+
+                    db.Products.Attach(entity);
+                    db.Products.Remove(entity);
+                    db.SaveChanges();
+                }
+            }
+
+            return Json(new[] { productTable }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpPost]
+        public ActionResult Excel_Export_Save(string contentType, string base64, string fileName)
+        {
+            var fileContents = Convert.FromBase64String(base64);
+
+            return File(fileContents, contentType, fileName);
+        }
+
+        [HttpPost]
+        public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
+        {
+            var fileContents = Convert.FromBase64String(base64);
+
+            return File(fileContents, contentType, fileName);
+        }
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    db.Dispose();
+        //    base.Dispose(disposing);
+        //}
     }
 }
+

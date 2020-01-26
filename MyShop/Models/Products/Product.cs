@@ -205,7 +205,6 @@ namespace MyShop.Models.Products
         {
             List<ProductData> result;
             {
-
                 result = db.Products
                     .Where(product => product.Discontinued != true
                     && product.UnitsInStock > 0
@@ -214,6 +213,7 @@ namespace MyShop.Models.Products
                     {
                         ProductID = product.Id,
                         ProductName = product.ProductName,
+                        Description = product.Description,
                         UnitPrice = product.UnitPrice ?? 0,
                         UnitsInStock = product.UnitsInStock ?? 0,
                         UnitsOnOrder = product.UnitsOnOrder ?? 0,
@@ -221,7 +221,27 @@ namespace MyShop.Models.Products
                         LastSupply = product.LastSupply
                     }).ToList();
                 return result;
+            }
+        }
 
+        public static IQueryable<ProductTable> GetAdminProducts(_DatabseContextShop db)
+        {
+            IQueryable<ProductTable> result;
+            {
+                result = db.Products
+
+                    .Select(product => new ProductTable
+                    {
+                        Id = product.Id,
+                        ProductName = product.ProductName,
+                        UnitPrice = product.UnitPrice ?? 0,
+                        UnitsInStock = product.UnitsInStock ?? 0,
+                        UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                        Discontinued = product.Discontinued,
+                        LastSupply = product.LastSupply,
+                        Description = product.Description
+                    });
+                return result;
             }
         }
 

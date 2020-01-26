@@ -11,29 +11,29 @@
     {
         @Html.AntiForgeryToken()
         <div class="row">
-            <div class="col-md-6 myCenter">
+            <div class="col-md-4 myCenter">
                 @Html.LabelFor(m => m.ProductID )
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-8 ">
                 @Html.TextBoxFor(m => m.ProductID, new { @readonly = "true", @class = "form-control" })
             </div>
         </div>
         <br />
        <div class="row">
-           <div class="col-md-6 myCenter">
-               @Html.LabelFor(m => m.ProductName, new { @class = "col-md-2 control-label" })
+           <div class="col-md-4 myCenter">
+               @Html.LabelFor(m => m.ProductName, new { @class = "control-label" })
            </div>
-           <div class="col-md-6">
+           <div class="col-md-8">
                @Html.TextBoxFor(m => m.ProductName, new {@class = "form-control" })
                @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
            </div>           
        </div>
             <br />
             <div class="row">
-                <div class="col-md-6 myCenter">
-                    @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                <div class="col-md-4 myCenter">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
                 </div>
@@ -41,10 +41,10 @@
             <br />
 
     <div class="row">
-        <div class="col-md-6 myCenter">
-            @Html.LabelFor(m => m.UnitPrice, new {@class = "col=md-2 control-label" })
+        <div class="col-md-4 myCenter">
+            @Html.LabelFor(m => m.UnitPrice, new {@class = "control-label" })
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             @Html.TextBoxFor(m => m.UnitPrice, new {@type = "number", @step = "0.01", @class ="form-control" })
             @Html.ValidationMessageFor(m => m.UnitPrice, "", new { @class = "text-danger" })
         </div>
@@ -52,10 +52,10 @@
     <br />
 
     <div class="row">
-        <div class="col-md-6 myCenter">
-            @Html.LabelFor(m => m.UnitsInStock, new { @class = "col=md-2 control-label" })
+        <div class="col-md-4 myCenter">
+            @Html.LabelFor(m => m.UnitsInStock, new { @class = "control-label" })
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             @Html.TextBoxFor(m => m.UnitsInStock, new { @type = "number", @class = "form-control" })
             @Html.ValidationMessageFor(m => m.UnitsInStock, "", new { @class = "text-danger" })
         </div>
@@ -63,12 +63,9 @@
     <br />
 
 
-    <div class="row-md-10" >
-        <div class="wrapper">
+        <div class="wrapper col-md-11 ">
             <input class="btn btn-primary" type="submit" value="Add Product" />
         </div>
-    </div>
-
     }
 
 

@@ -16,7 +16,7 @@ namespace MyShop.Models.Products
         [Required]
         public string ProductName { get; set; }
 
-        [DisplayName("Desription of a product")]
+        [DisplayName("Description of a product")]
         [Required]
         public string Description { get; set; }
 

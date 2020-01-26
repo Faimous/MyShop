@@ -1,0 +1,51 @@
+﻿<br />
+
+@(Html.Kendo().Grid<MyShop.Models._Databse.ProductTable>()
+      .Name("gridAdminList")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id).Editable("notEditable");
+          columns.Bound(c => c.ProductName);
+          columns.Bound(c => c.Description);
+          columns.Bound(c => c.UnitPrice);
+          columns.Bound(c => c.UnitsInStock);
+          columns.Bound(c => c.Discontinued);
+          columns.Bound(c => c.LastSupply).Format("{0:dd/MM/yyyy}");
+      })
+      .ToolBar(toolbar =>
+      {
+          //toolbar.Excel();
+          //toolbar.Pdf();
+          toolbar.Template("<a class='k-button k-button-icontext' href='AddProduct'></span>Add new product</a>");
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.InCell))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Products_ReadAdmin", "Product"))
+          .Update(update => update.Action("Products_Update", "Product"))
+          .Destroy(destroy => destroy.Action("Products_Destroy", "Product"))
+      )
+)
+
+
+<style>
+k-grid-content k-auto-scrollable{
+    height:600px;
+}
+
+.tr
+{
+    border-bottom:solid;
+    border-bottom-color:black;
+    border-bottom-width:10px;
+}
+</style>

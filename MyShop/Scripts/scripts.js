@@ -19,6 +19,10 @@
         window.location.replace("/Product/ShowProduct/" + id);
     }
 
+    function Add() {
+        window.location.replace("/Product/AddProduct/");
+    }
+
     
 
     
