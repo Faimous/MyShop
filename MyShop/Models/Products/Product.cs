@@ -8,7 +8,7 @@ namespace MyShop.Models.Products
 {
     public class Product
     {
-          private static bool UpdateDatabase = false;
+        private static bool UpdateDatabase = false;
         // private SampleEntities entities;
 
         public Product()
@@ -54,58 +54,26 @@ namespace MyShop.Models.Products
             return GetAll();
         }
 
-        public void Create(ProductData product)
+        public static void Add(ProductData product, _DatabseContextShop db)
         {
-            if (!UpdateDatabase)
-            {
-                var first = GetAll().OrderByDescending(e => e.ProductID).FirstOrDefault();
-                var id = (first != null) ? first.ProductID : 0;
+            var entity = new ProductTable();
 
-                product.ProductID = id + 1;
+            entity.ProductName = product.ProductName;
+            entity.UnitPrice = product.UnitPrice;
+            entity.Description = product.Description;
+            entity.UnitsInStock = (short)product.UnitsInStock;
+            entity.Discontinued = product.Discontinued;
+            entity.Id = product.ProductID;
+            entity.LastSupply = DateTime.Now;
+            entity.UnitsOnOrder = product.UnitsOnOrder;
 
-                //if (product.CategoryID == null)
-                //{
-                //    product.CategoryID = 1;
-                //}
 
-                //if (product.Category == null)
-                //{
-                //    product.Category = new CategoryViewModel() { CategoryID = 1, CategoryName = "Beverages" };
-                //}
 
-                GetAll().Insert(0, product);
-            }
-            else
-            {
-                using (var db = new _Databse._DatabseContextShop())
-                {
-                    var entity = new ProductTable();
-
-                    entity.ProductName = product.ProductName;
-                    entity.UnitPrice = product.UnitPrice;
-                    entity.Description = product.Description;
-                    entity.UnitsInStock = (short)product.UnitsInStock;
-                    entity.Discontinued = product.Discontinued;
-                    //entity.CategoryID = product.CategoryID;
-
-                    //if (entity.CategoryID == null)
-                    //{
-                    //    entity.CategoryID = 1;
-                    //}
-
-                    //if (product.Category != null)
-                    //{
-                    //    entity.CategoryID = product.Category.CategoryID;
-                    //}
-
-                    db.Products.Add(entity);
-                    db.SaveChanges();
-
-                    product.ProductID = entity.Id;
-
-                }                
-            }
+            db.Products.Add(entity);
+            db.SaveChanges();
         }
+
+
 
         //public void Update(ProductData product)
         //{
@@ -164,7 +132,7 @@ namespace MyShop.Models.Products
         //            //db.Entry(entity).State = EntityState.Modified;
         //            db.SaveChanges();
         //        }
-                   
+
         //    }
         //}
 
@@ -201,32 +169,32 @@ namespace MyShop.Models.Products
 
         public ProductTable GetOneProduct(int id, _DatabseContextShop db)
         {
-           
-                ProductTable result = db.Products.FirstOrDefault(x => x.Id == id);
-                return result;
-            
-            
+
+            ProductTable result = db.Products.FirstOrDefault(x => x.Id == id);
+            return result;
+
+
         }
 
         public static ProductData GetOneProductModel(int id, _DatabseContextShop db)
         {
             //using (var db = new _DatabseContextShop())
             //{
-                var result = db.Products.Where(x => x.Id == id)
-                    .Select(x => new ProductData
-                    {
-                        Discontinued = x.Discontinued,
-                        Description = x.Description,
-                        LastSupply = x.LastSupply,
-                        ProductID = x.Id,
-                        ProductName = x.ProductName,
-                        UnitPrice = x.UnitPrice,
-                        UnitsInStock = x.UnitsInStock,
-                        UnitsOnOrder = x.UnitsOnOrder
-                    })
-                        .FirstOrDefault();
+            var result = db.Products.Where(x => x.Id == id)
+                .Select(x => new ProductData
+                {
+                    Discontinued = x.Discontinued,
+                    Description = x.Description,
+                    LastSupply = x.LastSupply,
+                    ProductID = x.Id,
+                    ProductName = x.ProductName,
+                    UnitPrice = x.UnitPrice,
+                    UnitsInStock = x.UnitsInStock,
+                    UnitsOnOrder = x.UnitsOnOrder
+                })
+                    .FirstOrDefault();
 
-                 return result;
+            return result;
 
             //}
 
@@ -237,23 +205,23 @@ namespace MyShop.Models.Products
         {
             List<ProductData> result;
             {
-              
-                    result = db.Products
-                        .Where(product => product.Discontinued != true
-                        && product.UnitsInStock > 0
-                        )
-                        .Select(product => new ProductData
-                        {
-                            ProductID = product.Id,
-                            ProductName = product.ProductName,
-                            UnitPrice = product.UnitPrice ?? 0,
-                            UnitsInStock = product.UnitsInStock ?? 0,
-                            UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                            Discontinued = product.Discontinued,
-                            LastSupply = product.LastSupply
-                        }).ToList();
-                    return result;
-                
+
+                result = db.Products
+                    .Where(product => product.Discontinued != true
+                    && product.UnitsInStock > 0
+                    )
+                    .Select(product => new ProductData
+                    {
+                        ProductID = product.Id,
+                        ProductName = product.ProductName,
+                        UnitPrice = product.UnitPrice ?? 0,
+                        UnitsInStock = product.UnitsInStock ?? 0,
+                        UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                        Discontinued = product.Discontinued,
+                        LastSupply = product.LastSupply
+                    }).ToList();
+                return result;
+
             }
         }
 

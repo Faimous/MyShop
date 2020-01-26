@@ -215,9 +215,13 @@
     <Compile Include="Migrations\202001261653251_description.Designer.cs">
       <DependentUpon>202001261653251_description.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001262011120_CartItem.cs" />
+    <Compile Include="Migrations\202001262011120_CartItem.Designer.cs">
+      <DependentUpon>202001262011120_CartItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Cart\Item.cs" />
+    <Compile Include="Models\Cart\Cart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Orders\Order.cs" />
@@ -225,6 +229,7 @@
     <Compile Include="Models\Orders\OrderStatus.cs" />
     <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Products\ProductData.cs" />
+    <Compile Include="Models\_Databse\CartItemTable.cs" />
     <Compile Include="Models\_Databse\OrderStatusTable.cs" />
     <Compile Include="Models\_Databse\ProductCategoryTable.cs" />
     <Compile Include="Models\_Databse\_DatabseContextShop.cs" />
@@ -427,10 +432,10 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
     <Content Include="Views\Product\ShowProduct.cshtml" />
+    <Content Include="Views\Cart\CartView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cart\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Orders\" />
   </ItemGroup>
@@ -453,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001261653251_description.resx">
       <DependentUpon>202001261653251_description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001262011120_CartItem.resx">
+      <DependentUpon>202001262011120_CartItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

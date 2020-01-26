@@ -13,7 +13,7 @@ namespace MyShop.Controllers
 {
     public class ProductController : DefaultController
     {
-      
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -25,32 +25,51 @@ namespace MyShop.Controllers
             using (var db = new _DatabseContextShop())
             {
                 return Json(Product.GetProducts(db).ToDataSourceResult(request));
-            }              
+            }
         }
-      
+
 
         [HttpGet]
         public ActionResult List()
         {
             using (var db = new _DatabseContextShop())
             {
-                 List<ProductData> model = Product.GetProducts(db);
-                 return View(model);
-            }              
+                List<ProductData> model = Product.GetProducts(db);
+                return View(model);
+            }
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult AddProduct()
         {
-            return View();
+            var model = new ProductData();
+            int i;
+
+            //New product id 1 bigger than current biggest
+            using (var db = new _DatabseContextShop())
+            {
+                i = db.Products.OrderByDescending(x => x.Id).FirstOrDefault().Id;
+            }
+            model.ProductID = i + 1;
+            return View(model);
         }
 
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddProduct(OrderData model)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddProduct(ProductData model)
         {
+            if (ModelState.IsValid)
+            {
+                using (var db = new _DatabseContextShop())
+                {
+                    Product.Add(model, db);
+                }
+               // return View();
+
+            }
             return View(model);
         }
 
@@ -60,8 +79,8 @@ namespace MyShop.Controllers
         {
             using (var db = new _DatabseContextShop())
             {
-               var model = Product.GetOneProductModel(id, db);
-               return View(model);
+                var model = Product.GetOneProductModel(id, db);
+                return View(model);
             }
         }
     }

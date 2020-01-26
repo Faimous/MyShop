@@ -19,6 +19,8 @@ namespace MyShop.Models._Databse
         public DbSet<ProductTable> Products { get; set; }
         public DbSet<OrderTable> Orders { get; set; }
         public DbSet<OrderStatusTable> OrderStatuses { get; set; }
-      //  public DbSet<ProductCategoryTable> ProductCategories { get; set; }
+        public DbSet<CartItemTable> ShoppingCartItems { get; set; }
+
+        //  public DbSet<ProductCategoryTable> ProductCategories { get; set; }
     }
 }
