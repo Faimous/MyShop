@@ -1,16 +1,24 @@
-﻿function showProduct(id) 
-{
-    $.ajax({  
-        type: "POST",  
-        url: "/Product/ShowProduct",  
-        data: { 'id': id }  ,
-        dataType: "json",
-        success: function (data) {
+﻿//function showProduct(id) {
 
-        },  
-        error: function (data) {  
-            alert('fail')
-        }
-    });  
+//    $.ajax({
+//        type: "POST",
+//        url: "/Product/ShowProduct",
+//        data: { 'id': id },
+//        dataType: "json",
+//            success: function (data) {
+//                $('#listview').replaceWith(data);            },  
+//            error: function (data) {
+//                $('#body').replaceWith(data);
+//               alert('fail' + data)
+//            }
+//        });  
+//}
 
-}
+    function showProduct(id)
+    {
+        window.location.replace("/Product/ShowProduct/" + id);
+    }
+
+    
+
+    

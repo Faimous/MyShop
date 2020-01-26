@@ -1,6 +1,6 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <div id="MyShopAuthorized">
+    <div id="MyShopAuthorizedMenu">
         @(Html.Kendo().Menu()
           .Name("Menu")
           .Items(items =>
@@ -22,7 +22,7 @@
 
 else
 {
-<div id = "MyShopUnauthorized" >
+<div id = "MyShopUnauthorizedMenu" >
     @(Html.Kendo().Menu()
       .Name("Menu")
       .Items(items =>

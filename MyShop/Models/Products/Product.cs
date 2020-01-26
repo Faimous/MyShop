@@ -105,66 +105,66 @@ namespace MyShop.Models.Products
             }
         }
 
-        public void Update(ProductData product)
-        {
-            if (!UpdateDatabase)
-            {
-                var target = One(e => e.ProductID == product.ProductID);
+        //public void Update(ProductData product)
+        //{
+        //    if (!UpdateDatabase)
+        //    {
+        //        var target = One(e => e.ProductID == product.ProductID);
 
-                if (target != null)
-                {
-                    target.ProductName = product.ProductName;
-                    target.UnitPrice = product.UnitPrice;
-                    target.UnitsInStock = product.UnitsInStock;
-                    target.Discontinued = product.Discontinued;
+        //        if (target != null)
+        //        {
+        //            target.ProductName = product.ProductName;
+        //            target.UnitPrice = product.UnitPrice;
+        //            target.UnitsInStock = product.UnitsInStock;
+        //            target.Discontinued = product.Discontinued;
 
-                    //if (product.CategoryID == null)
-                    //{
-                    //    product.CategoryID = 1;
-                    //}
+        //            //if (product.CategoryID == null)
+        //            //{
+        //            //    product.CategoryID = 1;
+        //            //}
 
-                    //if (product.Category != null)
-                    //{
-                    //    product.CategoryID = product.Category.CategoryID;
-                    //}
-                    //else
-                    //{
-                    //    product.Category = new CategoryViewModel()
-                    //    {
-                    //        CategoryID = (int)product.CategoryID,
-                    //        CategoryName = entities.Categories.Where(s => s.CategoryID == product.CategoryID).Select(s => s.CategoryName).First()
-                    //    };
-                    //}
+        //            //if (product.Category != null)
+        //            //{
+        //            //    product.CategoryID = product.Category.CategoryID;
+        //            //}
+        //            //else
+        //            //{
+        //            //    product.Category = new CategoryViewModel()
+        //            //    {
+        //            //        CategoryID = (int)product.CategoryID,
+        //            //        CategoryName = entities.Categories.Where(s => s.CategoryID == product.CategoryID).Select(s => s.CategoryName).First()
+        //            //    };
+        //            //}
 
-                    //target.CategoryID = product.CategoryID;
-                    //target.Category = product.Category;
-                }
-            }
-            else
-            {
-                using (var db = new _Databse._DatabseContextShop())
-                {
-                    var entity = new ProductTable();
+        //            //target.CategoryID = product.CategoryID;
+        //            //target.Category = product.Category;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        using (var db = new _Databse._DatabseContextShop())
+        //        {
+        //            var entity = new ProductTable();
 
-                    entity.Id = product.ProductID;
-                    entity.ProductName = product.ProductName;
-                    entity.UnitPrice = product.UnitPrice;
-                    entity.UnitsInStock = (short)product.UnitsInStock;
-                    entity.Discontinued = product.Discontinued;
-                    //entity.CategoryID = product.CategoryID;
+        //            entity.Id = product.ProductID;
+        //            entity.ProductName = product.ProductName;
+        //            entity.UnitPrice = product.UnitPrice;
+        //            entity.UnitsInStock = (short)product.UnitsInStock;
+        //            entity.Discontinued = product.Discontinued;
+        //            //entity.CategoryID = product.CategoryID;
 
-                    //if (product.Category != null)
-                    //{
-                    //    entity.CategoryID = product.Category.CategoryID;
-                    //}
+        //            //if (product.Category != null)
+        //            //{
+        //            //    entity.CategoryID = product.Category.CategoryID;
+        //            //}
 
-                    db.Products.Attach(entity);
-                    //db.Entry(entity).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
+        //            db.Products.Attach(entity);
+        //            //db.Entry(entity).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //        }
                    
-            }
-        }
+        //    }
+        //}
 
         //public void Destroy(ProductData product)
         //{
@@ -197,9 +197,37 @@ namespace MyShop.Models.Products
         //    }
         //}
 
-        public ProductData One(Func<ProductData, bool> predicate)
+        public ProductTable GetOneProduct(int id)
         {
-            return GetAll().FirstOrDefault(predicate);
+            using (var db = new _DatabseContextShop())
+            {
+                ProductTable result = db.Products.FirstOrDefault(x => x.Id == id);
+                return result;
+            }
+            
+        }
+
+        public static ProductData GetOneProductModel(int id, _DatabseContextShop db)
+        {
+            //using (var db = new _DatabseContextShop())
+            //{
+                var result = db.Products.Where(x => x.Id == id)
+                    .Select(x => new ProductData
+                    {
+                        Discontinued = x.Discontinued,
+                        LastSupply = x.LastSupply,
+                        ProductID = x.Id,
+                        ProductName = x.ProductName,
+                        UnitPrice = x.UnitPrice,
+                        UnitsInStock = x.UnitsInStock,
+                        UnitsOnOrder = x.UnitsOnOrder
+                    })
+                        .FirstOrDefault();
+
+                 return result;
+
+            //}
+
         }
 
 

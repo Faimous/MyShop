@@ -1,22 +1,33 @@
 ﻿@model List<MyShop.Models.Products.ProductData>   
+@{int i = 1;}
 
+ @*onclick="showProduct('#:ProductID#')"*@
+ @*onclick="location.href='@Url.Action("ShowProduct", "Product", new { id = ++i })'"*@
+<div id="body">
+</div>
+            
 <script type="text/x-kendo-tmpl" id="template">
-    <div class="product" onclick="showProduct('#:ProductID#')">      
-        <img src="@Url.Content("~/content/web/products/")#:ProductID#.jpg" alt="#:ProductName# image"/>
-        <h3>#:ProductName#</h3> 
-        <p>#:kendo.toString(UnitPrice, "c")#</p>
-    </div>
+        <div class="product"
+             onclick="showProduct('#:ProductID#')"           
+             >        
+                <img src="@Url.Content("~/content/web/products/")#:ProductID#.jpg" alt="#:ProductName# image"/>
+                <h3>#:ProductName#</h3>
+                <p>#:kendo.toString(UnitPrice, "c")#</p> 
+</div>
 </script>
+                
+
+
 
 <hr />
 
 <div class="demo-section k-content wide">
     @(Html.Kendo().ListView(Model)
     .Name("listView")
+    
     .TagName("div")
     .ClientTemplateId("template")
-    //.Selectable()
-  .DataSource(dataSource =>
+    .DataSource(dataSource =>
   {
       dataSource.Read(read => read.Action("Products_Read", "Product"));
       dataSource.PageSize(21);
@@ -29,9 +40,10 @@
     #listView {
         padding: 10px 5px;
         margin-bottom: -1px;
-        min-height: 510px;
+        /*min-height: 510px;*/
 
         background:inherit;
+
         /* Avoid cutout if font or line is bigger */
         font: inherit;
     }
@@ -97,6 +109,7 @@
         .k-pager-wrap
     {
         border-top: 0;
+        border:0;
     }
     .demo-section .k-listview:after
     {
@@ -106,14 +119,17 @@
         clear: both;
         visibility: hidden;
     }
-    .k-widget
-    {
-        background:inherit
-    }
+    
 
     .k-content
     {
-               background:inherit
+        background:inherit;
     }
+
+
+   .k-widget
+   {
+        border-style:inherit;
+   }
 
 </style>

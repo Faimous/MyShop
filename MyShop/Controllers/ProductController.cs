@@ -1,5 +1,6 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using MyShop.Models._Databse;
 using MyShop.Models.Orders;
 using MyShop.Models.Products;
 using System;
@@ -62,21 +63,36 @@ namespace MyShop.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         [Authorize]
         public ActionResult AddProduct(OrderData model)
         {
-
-
             return View(model);
         }
 
 
-        [HttpPost]
-        public JsonResult ShowProduct(int id)
+        [HttpGet]
+        public ActionResult ShowProduct(int id)
         {
-            return Json(id);
+            using (var db = new _DatabseContextShop())
+            {
+                var model = Product.GetOneProductModel(id, db);
+               return View(model);
+            }
         }
+
+        //[HttpGet]
+        //public ActionResult ShowProduct()
+        //{
+        //    using (var db = new _DatabseContextShop())
+        //    {
+        //       // var model = Product.GetOneProductModel(id, db);
+        //        return View();
+        //    }
+
+        //}
 
     }
 }
