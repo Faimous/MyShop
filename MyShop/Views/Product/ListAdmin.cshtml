@@ -7,7 +7,7 @@
           columns.Bound(c => c.Id).Editable("notEditable");
           columns.Bound(c => c.ProductName);
           columns.Bound(c => c.Description);
-          columns.Bound(c => c.UnitPrice);
+          columns.Bound(c => c.UnitPrice).Title("Unit price ($)");
           columns.Bound(c => c.UnitsInStock);
           columns.Bound(c => c.Discontinued);
           columns.Bound(c => c.LastSupply).Format("{0:dd/MM/yyyy}");
@@ -55,5 +55,4 @@ k-grid-content k-auto-scrollable{
     {
         return false;
     }
-
 </script>

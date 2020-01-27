@@ -11,7 +11,7 @@ namespace MyShop.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("List", "Product");
         }
 
         public ActionResult About()

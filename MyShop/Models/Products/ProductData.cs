@@ -21,11 +21,9 @@ namespace MyShop.Models.Products
         public string Description { get; set; }
 
         [DisplayName("Price per unit")]
-        [Required]
         public decimal?  UnitPrice { get; set; }
 
         [DisplayName("Units currently in stock")]
-        [Required]
         public decimal? UnitsInStock { get; set; }
 
         [DisplayName("units on order")]

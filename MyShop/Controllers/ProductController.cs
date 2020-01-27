@@ -62,11 +62,11 @@ namespace MyShop.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult UploadView()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult UploadView()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         [Authorize]
@@ -119,10 +119,6 @@ namespace MyShop.Controllers
         {
             return View();
         }
-
-        // private _DatabseContextShop db = new _DatabseContextShop();
-
-
 
       
 
@@ -198,12 +194,6 @@ namespace MyShop.Controllers
 
             return File(fileContents, contentType, fileName);
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    db.Dispose();
-        //    base.Dispose(disposing);
-        //}
     }
 }
 

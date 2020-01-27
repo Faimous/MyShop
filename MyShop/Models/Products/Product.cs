@@ -15,44 +15,7 @@ namespace MyShop.Models.Products
         {
         }
 
-        public static IList<ProductData> GetAll()
-        {
-            var result = HttpContext.Current.Session["Products"] as IList<ProductData>;
 
-            if (result == null || UpdateDatabase)
-            {
-                using (var db = new _Databse._DatabseContextShop())
-                {
-                    result = db.Products.Select(product => new ProductData
-                    {
-                        ProductID = product.Id,
-                        ProductName = product.ProductName,
-                        Description = product.Description,
-                        UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
-                        UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
-                        //  QuantityPerUnit = product.QuantityPerUnit,
-                        Discontinued = product.Discontinued,
-                        UnitsOnOrder = product.UnitsOnOrder.HasValue ? (int)product.UnitsOnOrder.Value : default(int),
-                        //CategoryID = product.CategoryID,
-                        //Category = new CategoryViewModel()
-                        //{
-                        //    CategoryID = product.Category.CategoryID,
-                        //    CategoryName = product.Category.CategoryName
-                        //},
-                        //LastSupply = DateTime.Today
-                    }).ToList();
-                }
-
-                HttpContext.Current.Session["Products"] = result;
-            }
-
-            return result;
-        }
-
-        public IEnumerable<ProductData> Read()
-        {
-            return GetAll();
-        }
 
         public static void Add(ProductData product, _DatabseContextShop db)
         {
@@ -73,99 +36,6 @@ namespace MyShop.Models.Products
             db.SaveChanges();
         }
 
-
-
-        //public void Update(ProductData product)
-        //{
-        //    if (!UpdateDatabase)
-        //    {
-        //        var target = One(e => e.ProductID == product.ProductID);
-
-        //        if (target != null)
-        //        {
-        //            target.ProductName = product.ProductName;
-        //            target.UnitPrice = product.UnitPrice;
-        //            target.UnitsInStock = product.UnitsInStock;
-        //            target.Discontinued = product.Discontinued;
-
-        //            //if (product.CategoryID == null)
-        //            //{
-        //            //    product.CategoryID = 1;
-        //            //}
-
-        //            //if (product.Category != null)
-        //            //{
-        //            //    product.CategoryID = product.Category.CategoryID;
-        //            //}
-        //            //else
-        //            //{
-        //            //    product.Category = new CategoryViewModel()
-        //            //    {
-        //            //        CategoryID = (int)product.CategoryID,
-        //            //        CategoryName = entities.Categories.Where(s => s.CategoryID == product.CategoryID).Select(s => s.CategoryName).First()
-        //            //    };
-        //            //}
-
-        //            //target.CategoryID = product.CategoryID;
-        //            //target.Category = product.Category;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        using (var db = new _Databse._DatabseContextShop())
-        //        {
-        //            var entity = new ProductTable();
-
-        //            entity.Id = product.ProductID;
-        //            entity.ProductName = product.ProductName;
-        //            entity.UnitPrice = product.UnitPrice;
-        //            entity.UnitsInStock = (short)product.UnitsInStock;
-        //            entity.Discontinued = product.Discontinued;
-        //            //entity.CategoryID = product.CategoryID;
-
-        //            //if (product.Category != null)
-        //            //{
-        //            //    entity.CategoryID = product.Category.CategoryID;
-        //            //}
-
-        //            db.Products.Attach(entity);
-        //            //db.Entry(entity).State = EntityState.Modified;
-        //            db.SaveChanges();
-        //        }
-
-        //    }
-        //}
-
-        //public void Destroy(ProductData product)
-        //{
-        //    if (!UpdateDatabase)
-        //    {
-        //        var target = GetAll().FirstOrDefault(p => p.ProductID == product.ProductID);
-        //        if (target != null)
-        //        {
-        //            GetAll().Remove(target);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        var entity = new Product();
-
-        //        entity.ProductID = product.ProductID;
-
-        //        entities.Products.Attach(entity);
-
-        //        entities.Products.Remove(entity);
-
-        //        var orderDetails = entities.Order_Details.Where(pd => pd.ProductID == entity.ProductID);
-
-        //        foreach (var orderDetail in orderDetails)
-        //        {
-        //            entities.Order_Details.Remove(orderDetail);
-        //        }
-
-        //        entities.SaveChanges();
-        //    }
-        //}
 
         public ProductTable GetOneProduct(int id, _DatabseContextShop db)
         {
@@ -244,7 +114,5 @@ namespace MyShop.Models.Products
                 return result;
             }
         }
-
-
     }
 }
