@@ -11,14 +11,24 @@
           columns.Bound(c => c.UnitsInStock);
           columns.Bound(c => c.Discontinued);
           columns.Bound(c => c.LastSupply).Format("{0:dd/MM/yyyy}");
+          columns.Command(command => { command.Destroy(); }).Width(100);
       })
+
+      //    toolbar.Template("<a class='k-button k-button-icontext' href='AddProduct'></span>Add new product</a>");
+      // .ColumnMenu()
+      //.ToolBar(toolbar =>
+      //{
+      //    toolbar.Save();
+      //})
       .ToolBar(toolbar =>
       {
-          //toolbar.Excel();
-          //toolbar.Pdf();
-          toolbar.Template("<a class='k-button k-button-icontext' href='AddProduct'></span>Add new product</a>");
+          toolbar.Save();
+          toolbar.Custom()
+              .Action("AddProduct", "Product")
+              .Text("Add new item")
+              
+              ;
       })
-     // .ColumnMenu()
       .Editable(editable => editable.Mode(GridEditMode.InCell))
       .Pageable()
       .Navigatable()
