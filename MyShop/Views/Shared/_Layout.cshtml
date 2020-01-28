@@ -21,6 +21,21 @@
     }   
   
     <div class="container body-content">
+        <a class="basket">
+            <span>Your Basket: </span> @ViewBag.CartUnits
+            <table>
+                @foreach (var c in ViewBag.Cart)
+                {
+                    <tr><td>@c.Quantity x @String.Format("{0:c}", c.UnitPrice)</td><td>@c.PName</td></tr>
+                }
+                <tr>
+                    <td>Total: @String.Format("{0:c}", ViewBag.CartTotalPrice)</td>
+                    <td>@Html.ActionLink("Check Out", "Index", "Cart")</td>
+                </tr>
+            </table>
+        </a>
+        <br />
+        <br />
         @*<hr />*@
         @RenderBody()
 
@@ -36,3 +51,81 @@
 
   </body>
 </html>
+
+<style>
+
+.basket {
+    font-weight: bold;
+    font-size: .8em;
+    float: right;
+    padding: 20px;
+    background: none;
+    /*border: 1px solid #fff;*/
+    color: #2dbb9b;
+    letter-spacing: normal;
+    position: relative;
+}
+
+    .basket:hover {
+        background: #fff;
+    }
+
+    .basket span {
+        margin-right: 5px;
+        margin-left: -20px;
+        padding: 20px;
+        text-transform: uppercase;
+    }
+
+    .basket table {
+        position: absolute;
+        margin-top: 20px;
+        right: -1px;
+        display: none;
+        /*border: 1px solid #2dbb9b;*/
+        background: #fff;
+        color: #000000;
+        z-index: 3;
+        letter-spacing: normal;
+        text-transform: none;
+    }
+
+    .basket:hover table {
+        display: table;
+    }
+
+    .basket table tr {
+        transition: .3s;
+        -webkit-transition: .3s;
+        padding: 20px;
+    }
+
+        .basket table tr:hover {
+            opacity: .5;
+        }
+
+        .basket table tr:last-child:hover {
+            opacity: 1;
+        }
+
+        .basket table tr:last-child a {
+            padding: 10px 20px;
+            float: right;
+            color: #0a0497;
+            opacity: .7;
+            transition: .3s;
+            font-weight: bold;
+            letter-spacing: normal;
+            -webkit-transition: .3s;
+        }
+
+            .basket table tr:last-child a:hover {
+                opacity: 1;
+                background: #0a0497;
+                color: #fff;
+            }
+
+    .basket table td {
+        padding: 10px 20px;
+    }
+    </style>

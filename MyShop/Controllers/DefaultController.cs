@@ -1,4 +1,5 @@
 ﻿using MyShop.Models._Databse;
+using MyShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,39 @@ namespace MyShop.Controllers
 {
     public abstract class DefaultController : Controller
     {
-        protected _DatabseContextShop Database { get; set; }
+        protected _DatabseContextShop Database = new _DatabseContextShop();
 
-            public DefaultController()
+        public DefaultController()
+        {
+            ViewBag.CartTotalPrice = CartTotalPrice;
+            ViewBag.Cart = Cart;
+            ViewBag.CartUnits = Cart.Count;
+            Database = new _DatabseContextShop();
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            Database.Dispose();
+            base.Dispose(disposing);
+        }
+
+
+
+        private List<ShoppingCartTable> Cart
+        {
+            get
             {
-                Database = new _DatabseContextShop();
-            }
-
-
-            protected override void Dispose(bool disposing)
-            {
-                Database.Dispose();
-                base.Dispose(disposing);
+                return Database.ShoppingCartDatas.ToList();
             }
         }
-    
+
+        private decimal? CartTotalPrice
+        {
+            get
+            {
+                return Cart.Sum(c => c.Quantity * c.UnitPrice);
+            }
+        }
+    }
 }

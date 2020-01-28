@@ -1,8 +1,7 @@
 ﻿body {
     background-image: url('Images/background2.jpg');
-    background-attachment:scroll;     
+    background-attachment: scroll;
     margin: 0;
-
     /*padding-top: 50px;
     padding-bottom: 20px;*/
 }
@@ -27,25 +26,20 @@ textarea {
     max-width: 280px;
 }
 
-.k-widget listview
-{
-    background:inherit;
+.k-widget listview {
+    background: inherit;
 }
 
-.k-grid tr{
-    border-bottom:solid;
-    border-bottom-color:black;
-    border-bottom-width:10px;
-    background:inherit;
-
+.k-grid tr {
+    border-bottom: solid;
+    border-bottom-color: black;
+    border-bottom-width: 10px;
+    background: inherit;
 }
 
-.k-grid{
-background-color: rgba(255, 255, 255, 0.6);
-width:1200px;
-padding-left:0px;
-margin-left:0px;
-
+.k-grid {
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 1200px;
+    padding-left: 0px;
+    margin-left: 0px;
 }
-
-
