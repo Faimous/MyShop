@@ -1,6 +1,6 @@
 ﻿
 @(Html.Kendo().Grid<MyShop.Models._Databse.Orders_Products_Table>()
-      .Name("grid")
+      .Name("Order_Products_Grid")
       .Columns(columns =>
       {
           columns.Bound(c => c.OrderID);
@@ -19,4 +19,39 @@
           .Ajax()
           .Read(read => read.Action("Order_Products_Read", "Order"))
       )
+)
+<br />
+<br />
+
+@(Html.Kendo().Grid<MyShop.Models._Databse.OrderTable>()
+      .Name("Orders_Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id).Title("OrderID");
+          columns.Bound(c => c.FirstName);
+          columns.Bound(c => c.LastName);
+          columns.Bound(c => c.TelephoneNumer);
+         // columns.Bound(c => c.OrderDateTime).Format("{0:dd/MM/yyyy}");
+          columns.Bound(c => c.PostCode);
+          columns.Bound(c => c.Address1);
+          columns.Bound(c => c.Address2);
+          columns.Bound(c => c.Email);
+          //columns.Bound(c => c.OrderStatus);
+
+      })
+      //.Resizable(resize => resize.Columns(true))
+
+      .ToolBar(toolbar =>
+      {
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+
+      .Filterable()
+      //.Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("Order_Read", "Order"))
+      )
+
 )

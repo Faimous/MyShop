@@ -130,6 +130,27 @@ namespace MyShop.Controllers
             return File(fileContents, contentType, fileName);
         }
 
-     
+        public ActionResult Order_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<OrderTable> orders = Database.Orders;
+
+            DataSourceResult result = orders.ToDataSourceResult(request, newOrder => new {
+                Id = newOrder.Id,
+                OrderStatus = newOrder.OrderStatus,
+                TelephoneNumer = newOrder.TelephoneNumer,
+                OrderDateTime = newOrder.OrderDateTime,
+                FirstName = newOrder.FirstName,
+                LastName = newOrder.LastName,
+                Address1 = newOrder.Address1,
+                Address2 = newOrder.Address2,
+                Email = newOrder.Email,
+                State = newOrder.State,
+                PostCode = newOrder.PostCode
+            });
+
+            return Json(result);
+        }
+
+
     }
 }
