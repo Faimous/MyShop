@@ -16,23 +16,6 @@ namespace MyShop.Controllers
 
         public CartController()
         {
-            states = new List<object> {
-                new { SID = "NSW", SName = "New South Wales" },
-                new { SID = "VIC", SName = "Victoria" },
-                new { SID = "QLD", SName = "Queensland" },
-                new { SID = "TAs", SName = "Tasmania" },
-                new { SID = "NT", SName = "Northern Territory" },
-                new { SID = "SA", SName = "South Australia" },
-                new { SID = "WA", SName = "Western Australia" },
-                new { SID = "ACT", SName = "Australian Capital Territory" }
-            };
-
-            cards = new List<object> {
-                new { Type = "VISA" },
-                new { Type = "Master Card" },
-                new { Type = "AMEX" }
-            };
-
         }
 
         // GET: Checkout
@@ -166,7 +149,6 @@ namespace MyShop.Controllers
 
                     Database.ShoppingCartDatas.Add(cart);
                 }
-                product.UnitsInStock--;
                 Database.SaveChanges();
             }
         }

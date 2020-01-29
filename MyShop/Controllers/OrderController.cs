@@ -29,9 +29,6 @@ namespace MyShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Purchase(OrderData order)
         {
-            //ViewBag.States = states;
-            //ViewBag.Cards = cards;
-
             if (ModelState.IsValid)
             {
                 OrderTable o = new OrderTable
@@ -61,6 +58,9 @@ namespace MyShop.Controllers
                         TotalSale = i.Quantity * i.UnitPrice
                     });
                     Database.ShoppingCartDatas.Remove(i);
+
+                    //decrease stock
+                    Database.Products.FirstOrDefault(p => p.Id == i.PID).UnitsInStock--;
                 }
 
                 Database.SaveChanges();
