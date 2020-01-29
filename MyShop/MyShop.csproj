@@ -232,8 +232,13 @@
     <Compile Include="Migrations\202001272331398_nullable_decimal.Designer.cs">
       <DependentUpon>202001272331398_nullable_decimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001291012130_product_order.cs" />
+    <Compile Include="Migrations\202001291012130_product_order.Designer.cs">
+      <DependentUpon>202001291012130_product_order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\_Databse\Orders_Products_Table.cs" />
     <Compile Include="Models\_Databse\ShoppingCartTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -448,6 +453,7 @@
     <Content Include="Views\Product\ListAdmin.cshtml" />
     <Content Include="Views\Order\PurchaseSuccess.cshtml" />
     <Content Include="Views\Order\Purchase.cshtml" />
+    <Content Include="Views\Order\OrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -484,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001272331398_nullable_decimal.resx">
       <DependentUpon>202001272331398_nullable_decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001291012130_product_order.resx">
+      <DependentUpon>202001291012130_product_order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

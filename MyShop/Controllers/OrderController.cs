@@ -1,4 +1,6 @@
-﻿using MyShop.Models._Databse;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using MyShop.Models._Databse;
 using MyShop.Models.Orders;
 using MyShop.Models.Products;
 using System;
@@ -47,20 +49,19 @@ namespace MyShop.Controllers
                 };
            
 
-                // Database.Customers.Add(c);
                 Database.Orders.Add(o);
 
-                //foreach (var i in Database.ShoppingCartDatas.ToList<ShoppingCartTable>())
-                //{
-                //    Database.Order_Products.Add(new Order_Products
-                //    {
-                //        OrderID = o.OrderID,
-                //        PID = i.PID,
-                //        Qty = i.Quantity,
-                //        TotalSale = i.Quantity * i.UnitPrice
-                //    });
-                //    Database.ShoppingCartDatas.Remove(i);
-                //}
+                foreach (var i in Database.ShoppingCartDatas.ToList<ShoppingCartTable>())
+                {
+                    Database.Order_Products.Add(new Orders_Products_Table
+                    {
+                        OrderID = o.Id,
+                        ProductId = i.PID,
+                        Quantity = i.Quantity,
+                        TotalSale = i.Quantity * i.UnitPrice
+                    });
+                    Database.ShoppingCartDatas.Remove(i);
+                }
 
                 Database.SaveChanges();
                 ClearCart();
@@ -89,5 +90,46 @@ namespace MyShop.Controllers
         {
             return View();
         }
+
+
+        //private _DatabseContextShop db = new _DatabseContextShop();
+
+        [Authorize]
+        public ActionResult OrderList()
+        {
+            return View();
+        }
+
+        public ActionResult Order_Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<Orders_Products_Table> order_products = Database.Order_Products;
+            DataSourceResult result = order_products.ToDataSourceResult(request, orders_Products_Table => new {
+                Id = orders_Products_Table.Id,
+                ProductId = orders_Products_Table.ProductId,
+                OrderID = orders_Products_Table.OrderID,
+                Quantity = orders_Products_Table.Quantity,
+                TotalSale = orders_Products_Table.TotalSale
+            });
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult Excel_Export_Save(string contentType, string base64, string fileName)
+        {
+            var fileContents = Convert.FromBase64String(base64);
+
+            return File(fileContents, contentType, fileName);
+        }
+
+        [HttpPost]
+        public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
+        {
+            var fileContents = Convert.FromBase64String(base64);
+
+            return File(fileContents, contentType, fileName);
+        }
+
+     
     }
 }

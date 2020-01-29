@@ -1,0 +1,22 @@
+﻿
+@(Html.Kendo().Grid<MyShop.Models._Databse.Orders_Products_Table>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.OrderID);
+          columns.Bound(c => c.ProductId);
+          columns.Bound(c => c.Quantity);
+          columns.Bound(c => c.TotalSale);
+
+      })
+      .ToolBar(toolbar => {
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("Order_Products_Read", "Order"))
+      )
+)
