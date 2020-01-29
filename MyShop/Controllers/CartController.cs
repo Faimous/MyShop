@@ -99,6 +99,10 @@ namespace MyShop.Controllers
                 decimal? total;
 
                 total = db.ShoppingCartDatas.Select(p => p.UnitPrice * p.Quantity).Sum();
+                if (total == null)
+                {
+                    return Json(new { d = "" }, JsonRequestBehavior.AllowGet);
+                }
                 return Json(new { d = String.Format("{0:c}", total) }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -256,7 +260,7 @@ namespace MyShop.Controllers
         //    return View(customer);
         //}
 
- 
+
 
     }
 }

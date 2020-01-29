@@ -36,10 +36,8 @@
 
                     <br>
 
-                    <div class="btn btn-light text-uppercase">
-                        @Html.ActionLink("add to cart", "AddToCart", "Cart", new { id = @Model.ProductID }, null)
+                        @Html.ActionLink("add to cart", "AddToCart", "Cart", new { id = @Model.ProductID, }, new { @class = "btn btn-light text-uppercase" })
                         <span class="p-price">@String.Format("{0:c}", @Model.UnitPrice)</span>
-                    </div>
                 </article> <!-- card-body.// -->
             </aside> <!-- col.// -->
         </div> <!-- row.// -->

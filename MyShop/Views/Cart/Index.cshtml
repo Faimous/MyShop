@@ -17,7 +17,8 @@
                 url: "Cart/UpdateTotal",
                 contentType: "application/json; charset=utf-8",
                 success: function (msg) {
-                    if (msg.d == "$0.00") {
+                    if (msg.d == "$0.00" || msg.d === "" || String.length == 0 || msg == null) {
+                        //$('#purchaseButton').hide();
                         location.reload();
                         return;
                     }
@@ -42,7 +43,7 @@
                 success: function (msg) {
                     if (msg.d == 0) {
                         el.parentNode.parentNode.remove();
-                        $('#purchaseButton').hide()
+                        //$('#purchaseButton').hide()
                     } else {
                         $(el).siblings('span')[0].innerHTML = msg.d
                     }
@@ -166,7 +167,11 @@ else
         </div>
     </div>
 
-    <div class="checkout" id="purchaseButton">@Html.ActionLink("Purchase", "Purchase", "Order")</div>
+    <div id="purchaseButton" style="float:right">
+        @*@Html.ActionLink("Purchase", "Purchase", "Order")*@
+        @Html.ActionLink("Purchase", "Purchase", "Order", null, new { @class = "btn btn-light text-uppercase" })
+    </div>
+
     }
 </div>
     
@@ -175,6 +180,9 @@ else
     .basket{
         visibility:hidden;
     }     
+    .checkout{
+        background-color:white;
+    }
 
 
 </style>
