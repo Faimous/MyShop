@@ -39,7 +39,6 @@
           //columns.Bound(c => c.OrderStatus);
 
       })
-      //.Resizable(resize => resize.Columns(true))
 
       .ToolBar(toolbar =>
       {
@@ -48,7 +47,6 @@
       })
 
       .Filterable()
-      //.Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Read(read => read.Action("Order_Read", "Order"))
