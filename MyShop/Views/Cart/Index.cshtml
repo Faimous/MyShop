@@ -42,6 +42,7 @@
                 success: function (msg) {
                     if (msg.d == 0) {
                         el.parentNode.parentNode.remove();
+                        $('#purchaseButton').hide()
                     } else {
                         $(el).siblings('span')[0].innerHTML = msg.d
                     }
@@ -94,7 +95,19 @@ else
 
 <div class="shopping-cart">
 
-    <div class="column-labels">
+    @if (ViewBag.Cart.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+        <div id="EmptyDataMsg" class="alert alert-info">
+            <strong>Welcome!</strong> Your shopping cart is currently empty. Let's start shopping
+        </div>
+    }
+
+    else
+    {
+        <div class="column-labels">
         <label class="product-image">Image</label>
         <label class="product-details">Product</label>
         <label class="product-price">Price</label>
@@ -103,8 +116,8 @@ else
         <label class="product-line-price">Total</label>
        @* <label class="product-line-price" style="visibility:hidden">Total</label>*@
     </div>
-    @foreach (var item in ViewBag.Cart)
-    {
+        foreach (var item in ViewBag.Cart)
+        {
         <div class="product">
             <div class="product-image">
                 <img src="@Url.Content("~/content/web/products/" + @item.PID + ".jpg")" alt="@item.PName image" />
@@ -130,8 +143,8 @@ else
             @(item.Quantity * @item.UnitPrice)
             </div>
         </div>
-    }
-    
+        }
+
 
 
     <div class="totals">
@@ -153,9 +166,10 @@ else
         </div>
     </div>
 
-    <button class="checkout">@Html.ActionLink("Purchase", "Purchase", "Order")</button>
-
+    <div class="checkout" id="purchaseButton">@Html.ActionLink("Purchase", "Purchase", "Order")</div>
+    }
 </div>
+    
 
 <style>
     .basket{
