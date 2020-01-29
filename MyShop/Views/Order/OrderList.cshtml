@@ -6,7 +6,7 @@
           columns.Bound(c => c.OrderID);
           columns.Bound(c => c.ProductId);
           columns.Bound(c => c.Quantity);
-          columns.Bound(c => c.TotalSale);
+          columns.Bound(c => c.TotalSale).Title("Total price ($)");
 
       })
       .ToolBar(toolbar => {
