@@ -96,7 +96,7 @@ namespace MyShop.Controllers
                 {
                     Product.Add(model, db);
                 }
-                // return View();
+                 return RedirectToAction("ListAdmin");
 
             }
             return View(model);

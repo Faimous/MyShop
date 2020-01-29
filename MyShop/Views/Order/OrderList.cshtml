@@ -14,7 +14,7 @@
           toolbar.Pdf();
       })
       .Filterable()
-      .Scrollable()
+      //.Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Read(read => read.Action("Order_Products_Read", "Order"))
