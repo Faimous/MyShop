@@ -43,9 +43,9 @@
             </div>
             <div class="product-price">@item.UnitPrice</div>
             <div class="product-quantity">
-                <a class="glyphicon-plus" onclick="Change(this, 1, @item.PID)"></a>
+                <a class="glyphicon-plus" onclick="Change(this, 1, @item.PID)">+</a>
                 <span class="p-name">@item.Quantity</span>
-                <a class="glyphicon-minus" onclick="Change(this, 0,  @item.PID)"></a>
+                <a class="glyphicon-minus" onclick="Change(this, 0,  @item.PID)">-</a>
                 @*<a class="remove" onclick="Change(this, -1,  @item.PID)">Remove</a>*@
             </div>
             <div class="product-removal">
